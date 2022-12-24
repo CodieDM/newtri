@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DS Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form autocomplete="off" method="post" name="google-sheet">
+        <h3><center>Contact Form</center></h3>
+        <input type="text" placeholder="Type your name" name="name" />
+        <input type="email" placeholder="Type your mail" name="email" />
+        <input
+          type="text"
+          placeholder="Type your contact number"
+          name="mobile"
+        />
+        <select name="degree">
+          <option value="Not Selected">Select an option</option>
+          <option value="IT">IT</option>
+          <option value="CS">CS</option>
+          <option value="AIDS">AIDS</option>
+          <option value="EXTC">Extc</option>
+        </select>
+        <textarea
+          rows="4"
+          placeholder="How can we help?"
+          name="message"
+        ></textarea>
+        <label for=""> <b>Gender</b></label> <br />
+        Male<input type="radio" name="Gender" value="Male" /> 
+        Female<input type="radio" name="Gender" value="Female" />
+
+        <button type="submit" name="submit">Send</button>
+        <button type="reset" class="reset">Reset</button>
+      </form>
+    </div>
+    <script>
+      const scriptURL =
+        "https://script.google.com/macros/s/AKfycbypk83l4M6zh7fRjdRvU42Nlkh4G8G0Gpv_Bldnugb7Z_OWTmATAxNHfluZ8RkbUa0z7g/exec";
+      const form = document.forms["google-sheet"];
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        fetch(scriptURL, { method: "POST", body: new FormData(form) })
+          .then((response) =>
+            alert("Thanks for Contacting us..! We Will Contact You Soon...")
+          )
+          .catch((error) => console.error("Error!", error.message));
+      });
+    </script>
+  </body>
+</html>
